@@ -1,20 +1,24 @@
 from pymongo import MongoClient
 
 client = MongoClient()
-db = client['AMS-Journals']
+db = client['AMS-Journals']  # database name
 
-articlesCollection = db['articles']
-journalsCollection = db['journals']
+articlesCollection = db['articles']  # db collection
+journalsCollection = db['journals']  # db collection
 
 
 def checkForNewArticles():
-    if articlesCollection.find({"emailed": False}):
+    testArticle = articlesCollection.find_one({"emailed": False})
+    if testArticle:
+        print("New articles found")
         return True
     else:
+        print("No new articles found")
         return False
 
 
-def markEmailedArticles(articles):
+def markEmailedArticles():
+    print("Marking sent email as emailed")
     for article in articlesCollection.find({'emailed': False}):
         article['emailed'] = True
         articlesCollection.update({'title': article['title']}, article, upsert=True)
@@ -51,17 +55,6 @@ def getTemplateContext():
 
     contextDict = {"context": context}
     return contextDict
-
-
-def getUnemailedArticles():
-    articles = []
-
-    for article in articlesCollection.find({'emailed': False}):
-        articles.append(article)
-
-    if not articles:
-        print("There were no new articles to retrieve")
-    return articles
 
 
 if __name__ == "__main__":

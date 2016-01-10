@@ -13,7 +13,9 @@ def main():
     if checkForNewArticles():
         # loop through the recipients and render/send an email to each of them
         for recipient in recipients:
+            print('Rendering email for ' + recipient['name'])
             renderTemplate(recipient['name'])
+            print('Sending email to ' + recipient['email'])
             sendEmail(recipient['email'])
 
         # mark sent emails in db
