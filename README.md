@@ -19,11 +19,11 @@ Scrapy > MongoDB > Jinja2 > Email delivery with SMTPLib via gmail
   recipients = [
       {
           'name': 'Oliver',
-          'email': 'oldo.nicho AT gmail.com'
+          'email': 'dummy-email1@gmail.com'
       },
       {
           'name': 'Nollie',
-          'email': 'oldo.nicho1 ATgmail.com'
+          'email': 'dummy-email2@gmail.com'
       }
   ]
 
