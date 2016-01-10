@@ -1,0 +1,3 @@
+*.pyc
+recipients_and_app_data.py
+.DS_Store
