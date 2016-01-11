@@ -46,7 +46,7 @@ class ArticlePipeline(object):
             if not data:
                 raise DropItem("Missing {0}!".format(data))
         # check to see if article already exists and add if it doesn't
-        if self.collection.find_one({'title': item['title']}):
+        if self.collection.find_one({'url': item['url']}):
             return item
         else:
             self.collection.update({'url': item['url']}, dict(item), upsert=True)

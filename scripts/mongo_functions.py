@@ -8,17 +8,21 @@ journalsCollection = db['journals']  # db collection
 
 
 def checkForNewArticles():
-    testArticle = articlesCollection.find_one({"emailed": False})
+    testArticle = articlesCollection.count({"emailed": False})
     if testArticle:
-        print("New articles found")
+        print("\n**************************************\n")
+        print(str(testArticle) + " new article(s) found")
         return True
     else:
-        print("No new articles found")
+        print("\n**************************************")
+        print("\nNo new articles found")
+        print("\n**************************************")
         return False
 
 
 def markEmailedArticles():
-    print("Marking sent email as emailed")
+    print("Marking sent articles as emailed")
+    print("\n**************************************")
     for article in articlesCollection.find({'emailed': False}):
         article['emailed'] = True
         articlesCollection.update({'title': article['title']}, article, upsert=True)
